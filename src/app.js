@@ -1,6 +1,5 @@
 const express = require('express');
-
-// ...inicia o projeto
+const routes = require('./routes');
 
 const app = express();
 
@@ -11,7 +10,7 @@ app.get('/', (_request, response) => {
 
 app.use(express.json());
 
-// ...
+app.use(routes);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
