@@ -20,7 +20,11 @@ nos attributes, eu poderia também fazer:
 attributes: [array com atributos que eu quero]
 do jeito que fiz, estou passando apenas a chave que quero excluir do retorno
 */
-  const getUsers = () => User.findAll({
+const getUsers = () => User.findAll({
+  attributes: { exclude: 'password' },
+});
+
+const getUserById = (id) => User.findByPk(id, {
   attributes: { exclude: 'password' },
 });
 
@@ -28,4 +32,5 @@ module.exports = {
   findUser,
   createNewUser,
   getUsers,
+  getUserById,
 };

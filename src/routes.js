@@ -12,4 +12,6 @@ routes.post('/user', validaNewUser, userController.createNewUser);
 
 routes.get('/user', validaToken, userController.getUsers);
 
+routes.get('/user/:id', validaToken, userController.getUserById);
+
 module.exports = routes;
