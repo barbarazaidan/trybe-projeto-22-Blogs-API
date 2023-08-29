@@ -3,7 +3,7 @@ const geraToken = require('../utils/geraToken');
 
 const doLogin = async (req, res) => {
   const { email, password } = req.body;
-  const user = await userService.getUser(email); // retorna todas as info do usuário
+  const user = await userService.findUser(email); // retorna todas as info do usuário
 
   // só não entendi por que ele pega direto o user.password, já que a senha está
   // dentro do dataValues do User, que também é um objeto
@@ -21,8 +21,7 @@ const doLogin = async (req, res) => {
 const createNewUser = async (req, res) => {
   const { displayName, email, password, image } = req.body;
 
-  const user = await userService.getUser(email);
-  console.log(user, 'user')
+  const user = await userService.findUser(email);
   if (user) {
     return res.status(409).json({ message: 'User already registered' });
   }
@@ -45,7 +44,14 @@ const createNewUser = async (req, res) => {
   return res.status(201).json({ token });
 };
 
+const getUsers = async (_req, res) => {
+  const users = await userService.getUsers();
+
+  return res.status(200).json(users);
+};
+
 module.exports = {
   doLogin,
   createNewUser,
+  getUsers,
 };

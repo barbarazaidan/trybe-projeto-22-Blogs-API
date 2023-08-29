@@ -6,16 +6,26 @@ nas funções abaixo, não usei o async e await, pois estou retornando-as direta
 na chamada do controller
 */
 
-const getUser = (email) =>
+const findUser = (email) =>
   // o findOne retorna o primeiro elemento que satisfaz a condição, tipo o array.find()
   User.findOne({
     where: { email },
   });
 
-const createNewUser = async (displayName, email, password, image) =>
+const createNewUser = (displayName, email, password, image) =>
   User.create({ displayName, email, password, image });
 
+/*
+nos attributes, eu poderia também fazer:
+attributes: [array com atributos que eu quero]
+do jeito que fiz, estou passando apenas a chave que quero excluir do retorno
+*/
+  const getUsers = () => User.findAll({
+  attributes: { exclude: 'password' },
+});
+
 module.exports = {
-  getUser,
+  findUser,
   createNewUser,
+  getUsers,
 };
