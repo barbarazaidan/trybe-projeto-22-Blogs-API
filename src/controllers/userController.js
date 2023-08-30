@@ -20,7 +20,7 @@ const createNewUser = async (req, res) => {
 
   // assim que gero o newUser, o id vem como null e aparece uma chave null contendo o valor do id
 
-  safeUser.id = newUser.null;
+  // safeUser.id = newUser.null; // não preciso mais, pois ajustei o model
 
   const token = geraToken(safeUser);
 

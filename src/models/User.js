@@ -11,6 +11,12 @@ const userModel = (sequelize, DataTypes) => {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        /*
+        quando não defino o allowNull e o autoIncrement, ao criar um novo usuário, o retorno que tenho é
+        com um id inicialmente nulo, aí preciso fazer uns ajustes no controller
+        */
+        allowNull: false,
+        autoIncrement: true,
       },
       displayName: DataTypes.STRING,
       email: DataTypes.STRING,
