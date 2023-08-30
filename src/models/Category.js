@@ -8,6 +8,8 @@ const categoryModel = (sequelize, DataTypes) => {
         id: {
             allowNull: false,
             primaryKey: true,
+        // quando não coloco aqui o autoIncrement: true, o id vem como null ao inserir uma nova categoria no banco
+            autoIncrement: true,
             type: DataTypes.INTEGER
         },
         name: DataTypes.STRING,
