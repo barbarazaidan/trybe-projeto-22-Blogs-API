@@ -1,4 +1,4 @@
-const { Category, BlogPost, PostCategory, sequelize } = require('../models');
+const { Category, BlogPost, PostCategory } = require('../models');
 
 const validaCategoryIds = async (categoryIds) => {
   /*
