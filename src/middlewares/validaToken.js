@@ -9,7 +9,6 @@ const validaToken = (req, res, next) => {
   /*
     eu preciso envelopar tudo dentro do try catch, pois se a validação do verify mostrar que o token é inválido ou expirou, o JWT vai disparar um erro, fazendo a API quebrar
     */
-
   try {
     const { authorization: token } = req.headers;
     if (!token) {
@@ -21,7 +20,8 @@ const validaToken = (req, res, next) => {
     const secret = process.env.JWT_SECRET;
 
     const decodedToken = JWT.verify(usableToken, secret);
-    console.log(decodedToken, 'decodedToken');
+    // coloquei as informações do usuário dentro de uma nova chave criada no req e que chamei de payload
+    req.payload = decodedToken;
 
     next();
   } catch (error) {

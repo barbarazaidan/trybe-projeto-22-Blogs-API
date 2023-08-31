@@ -31,14 +31,14 @@ const postCategoryModel = (sequelize, DataTypes) => {
   postCategoryTable.associate = (models) => {
     models.Category.belongsToMany(models.BlogPost, {
       as: "posts",
-      foreignKey: "categoryId",
+      foreignKey: "categoryId", // chave estrangeira da model que está mandando da ação, ou seja, a Category
       otherKey: "postId",
       through: postCategoryTable,
     });
 
     models.BlogPost.belongsToMany(models.Category, {
       as: "categories",
-      foreignKey: "postId",
+      foreignKey: "postId", // chave estrangeira da model que está mandando da ação, ou seja, BlogPost
       otherKey: "categoryId",
       through: postCategoryTable,
     });

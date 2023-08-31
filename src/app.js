@@ -13,6 +13,7 @@ app.use(express.json()); // torna possível ler o body que vem nas requisições
 app.use('/login', routes.loginRouter);
 app.use('/user', routes.userRouter);
 app.use('/categories', routes.categoryRouter);
+app.use('/post', routes.blogPostRouter);
 
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
