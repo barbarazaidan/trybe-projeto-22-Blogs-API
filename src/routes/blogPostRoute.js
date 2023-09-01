@@ -7,5 +7,6 @@ const blogPostRouter = express.Router();
 
 blogPostRouter.post('/', validaToken, validaNewPost, blogPostController.createNewPost);
 blogPostRouter.get('/', validaToken, blogPostController.getPosts);
+blogPostRouter.get('/:id', validaToken, blogPostController.getPostById);
 
 module.exports = blogPostRouter;
