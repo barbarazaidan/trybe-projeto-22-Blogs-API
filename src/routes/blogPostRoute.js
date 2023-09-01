@@ -6,5 +6,6 @@ const validaNewPost = require('../middlewares/validaNewPost');
 const blogPostRouter = express.Router();
 
 blogPostRouter.post('/', validaToken, validaNewPost, blogPostController.createNewPost);
+blogPostRouter.get('/', validaToken, blogPostController.getPosts);
 
 module.exports = blogPostRouter;

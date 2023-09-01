@@ -1,4 +1,4 @@
-const { Category, BlogPost, PostCategory } = require('../models');
+const { Category, BlogPost, PostCategory, User } = require('../models');
 
 const validaCategoryIds = async (categoryIds) => {
   /*
@@ -50,17 +50,18 @@ const createNewPost = async ({
   updated,
   published,
   categoryIds,
-}) => {  
+}) => {
   // aqui crio o novo post
-  const newPost = await BlogPost.create(
-    { title, content, userId, updated, published },
-  );
+  const newPost = await BlogPost.create({
+    title, content, userId, updated, published,
+  });
 
   // aqui crio as novas informações para colocar na tabela PostCategory, tendo
   // o próprio id da categoria e também o id do novo post criado
-  const postCategoryData = categoryIds.map((category) => (
-    { categoryId: category, postId: newPost.id }
-  ));
+  const postCategoryData = categoryIds.map((category) => ({
+    categoryId: category,
+    postId: newPost.id,
+  }));
 
   // aqui coloco as novas informações na tabela PostCategory
   // o bulkCreate insere múltiplos registros no banco de uma vez só, recebendo como parâmetro um array
@@ -69,7 +70,19 @@ const createNewPost = async ({
   return newPost;
 };
 
+const getPosts = async () =>
+  // aqui retorno todos os posts e também as categorias presentes em cada uma deles
+  // usando o attributes: [], quero dizer que a pesquisa não deve retornar nenhuma das chaves da tabela PostCategory
+  // também retorno os dados do usuário que fez o post
+  BlogPost.findAll({
+    include: [
+      { model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
 module.exports = {
   createNewPost,
   validaCategoryIds,
+  getPosts,
 };
