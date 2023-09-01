@@ -44,12 +44,7 @@ const validaCategoryIds = async (categoryIds) => {
 // };
 
 const createNewPost = async ({
-  title,
-  content,
-  userId,
-  updated,
-  published,
-  categoryIds,
+  title, content, userId, updated, published, categoryIds,
 }) => {
   // aqui crio o novo post
   const newPost = await BlogPost.create({
