@@ -29,7 +29,7 @@ const createNewUser = async (req, res) => {
 
 const getUsers = async (_req, res) => {
   const users = await userService.getUsers();
-  console.log(users, 'users')
+  // console.log(users, 'users')
 
   return res.status(200).json(users);
 };
